@@ -32,4 +32,6 @@ while True:
         
     print(f'Your score is {score}')
 
+    if bowling_balls == 10:
+        break
         
