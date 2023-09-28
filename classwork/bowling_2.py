@@ -23,12 +23,26 @@ def show1(rounds,strike_one_shot,strike_two_shots):
         print('Wow Strike from first shot!')
         list_of_rounds_score[rounds - 1][0] = ''
         list_of_rounds_score[rounds - 10][1] = 'X'
+        item = True
+        while item == True:
+            if last_three_score[0] == '0':
+                item = False
+                last_three_score[0] = '1'
+            elif last_three_score[1] == '0':
+                item = False
+                last_three_score[1] = '1'
+
+
     else:
         round1_2 = int(input('your second shot > '))
         if round1_1 + round1_2 == 10:
-            print('Strike with two shots!')
-            round1_2 = '/'
-            strike_two_shots += 1
+            list_of_rounds_score[rounds - 1][0] = round1_1
+            list_of_rounds_score[rounds - 1][1] = '/'
+            last_three_score[0] = 1
+        else:
+            list_of_rounds_score[rounds - 1][0] = round1_1
+            list_of_rounds_score[rounds - 1][1] = round1_2
+            score[rounds-1] = round1_1 + round1_2
     if strike_one_shot == 1:
         last_three_score[0] = 10
     
@@ -58,9 +72,6 @@ def show2(rounds,strike_one_shot,strike_two_shots):
         score[rounds - 2] = last_three_score[0]
         print(score[rounds-2])
         
-
-
-
 
 
 while True:
@@ -96,4 +107,5 @@ while True:
         
     if rounds == 9:
         break
+    
     
