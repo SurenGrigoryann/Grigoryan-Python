@@ -14,7 +14,7 @@ list_of_rounds_score = [[round1_1,round1_2],
                         [round9_1,round9_2]]
 last_three_score = ['0','0','0']
 score = [0,0,0,0,0,0,0,0,0]
-score10 = 0
+score10 = [0]
 rounds = 0
 strike_one_shot = 0
 strike_two_shots = 0
@@ -120,7 +120,8 @@ def show2():
             score[rounds-1] = score[rounds-2] + round1_1 + round1_2
         # end if
         strike_one_shot = 0
-        strike_two_shots = 0       
+        strike_two_shots = 0
+           
     else:
         round10_1 = int(input('your first shot > '))
     #if strike_one_shot == 1:
@@ -144,6 +145,8 @@ def show2():
                 list_of_last_round[1] = round10_2
                 list_of_last_round[2] = round10_3
             # end if
+        # here needs elif
+        # need to find if score 9 or score 8 ar 0 or not
         else:
             round10_2 = int(input('your second shot > '))
             if round10_1 + round10_2 == 10:
@@ -154,10 +157,13 @@ def show2():
                 list_of_last_round[0] = round10_1
                 list_of_last_round[1] = round10_2
                 list_of_last_round[2] = round10_3
+
         time_to_stop = True
             # end if
         # end if
-        score10 = score[rounds-10] + round10_1 + round10_2 + round10_3
+        score10[0] = score[rounds-2] + round10_1 + round10_2 + round10_3
+
+        return time_to_stop
 
 # end function show2
  
@@ -180,12 +186,16 @@ while time_to_stop == False:
         # end if
     # end for
     print('    10 ', end = '')
-    for i in range(len(score)):
-        if int(score[i]) != 0:
-            hdcp_score = score[i]
-        # end if
-        i += 1
-    # end for
+    if score10[0] == 0:
+        for i in range(len(score)):
+            if int(score[i]) != 0:
+                hdcp_score = score[i] 
+            # end if
+            i += 1
+        # end for
+    else:
+        hdcp_score = score10[0]
+    # end if
     print(f' |\t{hdcp_score}\t|\t     |')
     for i in range(69):
         print('-', end = '')
@@ -205,7 +215,7 @@ while time_to_stop == False:
         print(score[i], end = '')
         print('  |', end = '')
     # end for
-    print(score10,'    |')
+    print(score10[0],'    |')
     #if rounds == 10:
      #   show3()
       #  break
@@ -216,5 +226,4 @@ while time_to_stop == False:
     # end if
     
     
-# Line 113
-# Need to write the round 10 of three shotys possible
+# return to line 148 some code need to be written
