@@ -4,4 +4,4 @@ for i in range(6):
     num[i] = input('Your num > ')
 # next i 
 for i in range(6):
-    print(num[len(num) - i-1])
+    print(num[len(num) - i - 1])
