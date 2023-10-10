@@ -1,16 +1,13 @@
-from csv import list_dialects
-
-
 list_of_cars = [['empty' for i in range(10)] for k in range(6)]
-#print(list_of_cars)
+
 parked = False
 
 
 while parked == False:
-        type_of_car = input('Your car > ')
-        coordinate_y = input("Your row > ")
-        coordinate_x = input("Your car's place > ")
-    #try:
+    type_of_car = input('Your car > ')
+    coordinate_y = input("Your row > ")
+    coordinate_x = input("Your car's place > ")
+    try:
         coordinate_x = int(coordinate_x)
         coordinate_y = int(coordinate_y)
         if coordinate_y <= 10 and coordinate_y >= 1 and coordinate_x >= 1 and coordinate_x <= 6:
@@ -23,5 +20,5 @@ while parked == False:
         else:
             print('Invalid input! Try again!')
     
-    #except:
-     #    print('Invalid input try again!', end = '\n')
+    except:
+         print('Invalid input try again!', end = '\n')

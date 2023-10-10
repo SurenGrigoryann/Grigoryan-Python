@@ -20,4 +20,4 @@ coordinate_y = int(input('Your coordinate y > '))
 a = coordinate_x
 b = coordinate_y 
 
-print(draw(a,b))
+print(draw(a - 1,b - 1))
