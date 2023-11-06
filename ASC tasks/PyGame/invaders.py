@@ -147,13 +147,14 @@ while not done:
 
     for block in block_list:
         if block.rect.y >= screen_length:
+            
+            block.rect.y = random.randrange(-30,0)
+            block.rect.x = random.randrange(0,screen_width)
+            
 
-            block_list.remove(block)
-            all_sprite_list.remove(block)
             lives -= 1
 
-
-
+    
 
 
     screen.fill(BLACK)
