@@ -56,7 +56,7 @@ while not done:
             self.length = S_length
             self.y_pos = y
             self.x_pos = x
-            self.image = pygame.surface.Surface(S_width,S_length )
+            self.image = pygame.Surface(S_width,S_length )
             self.image.fill(WHITE)
             self.speed = 5
             self.rect = self.image.get_rect()
