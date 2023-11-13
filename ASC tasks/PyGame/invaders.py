@@ -15,6 +15,7 @@ GREY = 	(128, 128, 128)
 
 class Block(pygame.sprite.Sprite):
     # block_speed needed
+    # constructor function
     def __init__(self,color):
 
         super().__init__()
@@ -23,12 +24,15 @@ class Block(pygame.sprite.Sprite):
         self.image.fill(color)
 
         self.rect = self.image.get_rect()
-    
+    # end constructor function
+
     def update(self):
         self.rect.y += 0.5
+    # end function
+# end class
 
 class Player(pygame.sprite.Sprite):
-
+    # constructor function
     def __init__(self):
 
         super().__init__()
@@ -37,12 +41,15 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(YELLOW)
 
         self.rect = self.image.get_rect()
-    
+    # end constructor function
+# end class
+
+
  #   def change(self,change_speed):
   #      self.rect.x += change_speed
 
 class Bullet(pygame.sprite.Sprite):
-
+    # constructor function
     def __init__(self):
         
         super().__init__()
@@ -51,20 +58,24 @@ class Bullet(pygame.sprite.Sprite):
         self.image.fill(RED)
 
         self.rect = self.image.get_rect()
+    # end constructor function
 
     def update(self):
         self.rect.y -= 3
+    # end function
+# end class
 
 
 # Initialize Pygame
 
 pygame.init()
 
+# screen parametrs
 screen_width = 900
 screen_length = 600
 screen = pygame.display.set_mode([screen_width, screen_length])
 
-
+# lists
 all_sprite_list = pygame.sprite.Group()
 
 block_list = pygame.sprite.Group()
@@ -83,7 +94,7 @@ for i in range(30):
 
     block_list.add(block)
     all_sprite_list.add(block)
-
+# next i
 
 player = Player()
 all_sprite_list.add(player)
@@ -101,6 +112,7 @@ bullets = 100
 
 font = pygame.font.Font(None,25)
 
+# main loop
 while not done:
     player.rect.x += speed
     for event in pygame.event.get():
@@ -139,11 +151,13 @@ while not done:
             bullet_list.remove(bullet)
             all_sprite_list.remove(bullet)
             score += 1
-            
+        # next block 
 
         if bullet.rect.y <= -10:
             bullet_list.remove(bullet)
             all_sprite_list.remove(bullet)
+        # end if
+    # next bullet
 
     for block in block_list:
         if block.rect.y >= screen_length:
@@ -151,9 +165,9 @@ while not done:
             block.rect.y = random.randrange(-30,0)
             block.rect.x = random.randrange(0,screen_width)
             
-
             lives -= 1
-
+        # end if
+    # next block
     
 
 
@@ -173,3 +187,4 @@ while not done:
     clock.tick(60)
 
 pygame.quit()
+# quiting pygame
