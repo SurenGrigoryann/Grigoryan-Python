@@ -160,12 +160,20 @@ while not done:
     # next bullet
 
     for block in block_list:
+        
         if block.rect.y >= screen_length:
-            
-            block.rect.y = random.randrange(-30,0)
-            block.rect.x = random.randrange(0,screen_width)
-            
+            block_list.remove(block)
+            all_sprite_list.remove(block)
+            block = Block(BLUE)
+
+            block.rect.x = random.randrange(screen_width)
+            block.rect.y = random.randrange(-5,-2)
+
+            block_list.add(block)
+            all_sprite_list.add(block)
+                    
             lives -= 1
+        
         # end if
     # next block
     

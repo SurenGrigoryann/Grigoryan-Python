@@ -28,7 +28,7 @@ if myDog3.color == 'Unknown':
 # end if
 
 class Puppy(Dog):
-    super
+    
     def __init__(self,shoesChewed):
         self.shoesChewed = shoesChewed
     # end function

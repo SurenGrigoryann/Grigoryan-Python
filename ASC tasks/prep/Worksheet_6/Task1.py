@@ -26,11 +26,4 @@ if myDog3.color == 'Unknown':
     myDog3.get_color()
     myDog3.get_name()
 
-myDog4 = Dog
-myDog4.name = 'Jeff'
-myDog4.color = 'Unkown'
 
-if myDog3.color == 'Unkown':
-    myDog3.set_color()
-    myDog3.get_color()
-    myDog3.get_name()
