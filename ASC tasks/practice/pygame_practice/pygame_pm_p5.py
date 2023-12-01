@@ -231,25 +231,30 @@ all_sprite_list.add(ghost)
 
 # creating hearts
 lives = 3
+
+# drawing hearts and removing hearts
 def heart():
     global done
     heart_x = 660
-    heart_y = 100
+    heart_y = 80
     if player.live == 0:
         print('you lose')
         done = True
-    if lives > player.live:
+    elif lives > player.live:
         for i in heart_list:
             heart_list.remove(i)
             all_sprite_list.remove(i)
             continue
+        # next i
+    # end if
     for i in range(player.live):
-        print(player.live)
+        #print(player.live)
         heart = Heart(heart_x,heart_y,RED)
         heart_list.add(heart)
         all_sprite_list.add(heart)
         heart_x += 40
-
+    # next i
+# end procedure 
 
 all_sprite_list.add(player)
  
@@ -258,7 +263,7 @@ clock = pygame.time.Clock()
 done = False
 
 
-
+font = pygame.font.Font(None,25)
 
 
 # Main loop
@@ -300,6 +305,11 @@ while not done:
     all_sprite_list.update()
     
     screen.fill(BLACK)
+    live_print = font.render(f'Your lives', True, WHITE)
+    #score_print = font.render(f'Score: {score}', True, WHITE)
+    screen.blit(live_print,[670,50])
+    #screen.blit(score_print,[100,100])
+
     heart()
     all_sprite_list.draw(screen)
     
