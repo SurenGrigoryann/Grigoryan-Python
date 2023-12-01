@@ -11,7 +11,7 @@ BLUE = (50, 50, 255)
 YELLOW = (255, 255, 0) 
 PINK = (255, 192, 203)
 BROWN = (150,75,0)
-
+RED = (255,0,0)
 
 Ghost_colors = [PINK,BROWN,WHITE]
 # Screen dimensions
@@ -39,6 +39,8 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
         self.walls = None
+        self.ghosts = None
+        self.live = 3
     # end procedure
 
     def changespeed(self, x, y):
@@ -80,6 +82,15 @@ class Player(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
             # end if
         # next block
+        for ghost in ghost_list:
+            if  self.rect.colliderect(ghost):
+                self.rect.x = 100
+                self.rect.y = 100
+                self.live -= 1
+
+            # end if
+        # next block
+
 # end class Player
  
 class Block(pygame.sprite.Sprite):
@@ -90,7 +101,7 @@ class Block(pygame.sprite.Sprite):
         super().__init__()
  
         # Make a blue block with 40 heigth and 40 width
-        self.image = pygame.Surface([40,40])
+        self.image = pygame.Surface([60,60])
         self.image.fill(BLUE)
  
         # Make our top-left corner the passed-in location.
@@ -134,6 +145,25 @@ class Ghost(pygame.sprite.Sprite):
 # end class
 
 
+# Creating heart class
+class Heart(pygame.sprite.Sprite):
+    # Constructor function
+    def __init__(self, x, y,color):
+        
+        super().__init__()
+ 
+        # Set height, width
+        self.image = pygame.Surface([30, 30])
+        self.image.fill(color)
+ 
+        # Make our top-left corner the passed-in location.
+        self.rect = self.image.get_rect()
+        self.rect.y = y
+        self.rect.x = x
+    
+
+        
+
 
 # Initializing pygame
 pygame.init()
@@ -143,11 +173,15 @@ screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
  
 # Seting the title of the window
 pygame.display.set_caption('Packman')
- 
+heart_list_list = []
 # List to hold all the sprites
 all_sprite_list = pygame.sprite.Group()
  
 wall_list = pygame.sprite.Group()
+
+ghost_list = pygame.sprite.Group()
+
+heart_list = pygame.sprite.Group()
 
 # creating the map
 map = [[1,1,1,1,1,1,1,1,1,1],
@@ -170,33 +204,62 @@ for i in map:
             wall_list.add(wall)
             all_sprite_list.add(wall)
             
-        x += 40
+        x += 60
     x = 0
-    y += 40
+    y += 60
 
 
 # creating the player
-player = Player(50, 50)
+player = Player(100, 100)
 player.walls = wall_list
 all_sprite_list.add(player)
  
 
 # creating 3 ghosts spreaded in the map
-ghost = Ghost(50, 350, PINK)
+ghost = Ghost(60, 500, PINK)
+ghost_list.add(ghost)
 all_sprite_list.add(ghost)
 
-ghost = Ghost(200, 200, PINK)
+ghost = Ghost(320, 320, PINK)
+ghost_list.add(ghost)
 all_sprite_list.add(ghost)
 
-ghost = Ghost(300, 50, PINK)
+ghost = Ghost(500, 100, PINK)
+ghost_list.add(ghost)
 all_sprite_list.add(ghost)
 # and adding everything to the all_sprite_list
+
+# creating hearts
+lives = 3
+def heart():
+    global done
+    heart_x = 660
+    heart_y = 100
+    if player.live == 0:
+        print('you lose')
+        done = True
+    if lives > player.live:
+        for i in heart_list:
+            heart_list.remove(i)
+            all_sprite_list.remove(i)
+            continue
+    for i in range(player.live):
+        print(player.live)
+        heart = Heart(heart_x,heart_y,RED)
+        heart_list.add(heart)
+        all_sprite_list.add(heart)
+        heart_x += 40
+
 
 all_sprite_list.add(player)
  
 clock = pygame.time.Clock()
  
 done = False
+
+
+
+
 
 # Main loop
 while not done:
@@ -224,13 +287,22 @@ while not done:
                 player.changespeed(0, 3)
             elif event.key == pygame.K_DOWN:
                 player.changespeed(0, -3)
- 
+    # need to calculate current and previous lives and if it is changed than remove the last heart from heart list
+   # for hearts in heart_list:
+    #    heart_list_list.append(hearts)
+    #if len(heart_list_list) > player.live:
+     #   heart_list.remove(heart_list_list[len(heart_list_list) - 1])
+           
+    #heart_list_list = []
+
+
     # updating all of the objects
     all_sprite_list.update()
- 
+    
     screen.fill(BLACK)
- 
+    heart()
     all_sprite_list.draw(screen)
+    
     # drawing everything
     pygame.display.flip()
     # fliping the display
@@ -239,3 +311,7 @@ while not done:
 pygame.quit()
 # quiting the pygame
 
+
+
+
+# come back to line 281
