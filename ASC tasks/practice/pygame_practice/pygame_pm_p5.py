@@ -130,7 +130,7 @@ class Ghost(pygame.sprite.Sprite):
         # Set speed vector
         self.change_x = 0
         self.change_y = 0
-        self.walls = None
+        self.blocks = None
     # end procedure
 
     def changespeed(self, x, y):
@@ -140,8 +140,45 @@ class Ghost(pygame.sprite.Sprite):
     # end procedure
 
 
-    #def update(self):
+    def update(self):
+        # updating player's position
+        # Move left/right
+        self.rect.x += self.change_x
+ 
+        # Checking if we hit anything horizontally
+        block_hit_list = pygame.sprite.spritecollide(self, self.blocks, False)
+        for block in block_hit_list:
+            # If we are moving right, set our right side to the left side of
+            # the item we hit
+            if self.change_x > 0:
+                self.rect.right = block.rect.left
+            else:
+                # Otherwise if we are moving left, do the opposite.
+                self.rect.left = block.rect.right
+            # end if
+        # next block
+ 
+        # Move up/down
+        self.rect.y += self.change_y
+ 
+        # Checking if we hit anything vertically
+        block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
+        for block in block_hit_list:
+ 
+            # Reset our position based on the top/bottom of the object.
+            if self.change_y > 0:
+                self.rect.bottom = block.rect.top
+            else:
+                self.rect.top = block.rect.bottom
+            # end if
+        # next block
+        for ghost in ghost_list:
+            if  self.rect.colliderect(ghost):
+                self.rect.x = 100
+                self.rect.y = 100
+                self.live -= 1
 
+        
 # end class
 
 
