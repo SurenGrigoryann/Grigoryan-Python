@@ -30,4 +30,4 @@ my_list.add_item(1)
 my_list.add_item(2)
 my_list.add_item(3)
 
-print(my_list[1])
+print(my_list)

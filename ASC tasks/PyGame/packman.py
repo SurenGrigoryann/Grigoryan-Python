@@ -15,8 +15,8 @@ RED = (255,0,0)
 
 Ghost_colors = [PINK,BROWN,WHITE]
 # Screen dimensions
-SCREEN_WIDTH = 1300
-SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
  
 # creating the class for the player
 class Player(pygame.sprite.Sprite):

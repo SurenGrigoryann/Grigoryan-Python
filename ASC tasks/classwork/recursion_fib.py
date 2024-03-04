@@ -6,8 +6,8 @@ def fib(n):
     
     else:
         
-        return fib(n-1) + fib(n-2), n
-    
+        return fib(n-1) + fib(n-2)
+
 	#endif
 #endfunction
 
